@@ -62,15 +62,16 @@ void TransposeSMatrix(SMatrix<ElemType> M, SMatrix<ElemType> &T)
 	{
 		int q = 1;
 		/*按M的列的顺序进行转置*/
-		/*对M的每一列遍历一遍三元组顺序表*/
-		for (int p = 1; p <= M.t; p++)
-			if (M.data[p].j == col)
-			{
-				T.data[q].i = M.data[p].j;
-				T.data[q].j = M.data[p].i;
-				T.data[q].e = M.data[p].e;
-				q++;
-			}
+		for (int col = 1; col <= M.n; col++)
+			/*对M的每一列遍历一遍三元组顺序表*/
+			for (int p = 1; p <= M.t; p++)
+				if (M.data[p].j == col)
+				{
+					T.data[q].i = M.data[p].j;
+					T.data[q].j = M.data[p].i;
+					T.data[q].e = M.data[p].e;
+					q++;
+				}
 	}
 }
 

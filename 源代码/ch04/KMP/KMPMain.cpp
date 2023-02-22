@@ -1,67 +1,57 @@
 #include <iostream>
-#include "string.h" /*å¼•å…¥å­—ç¬¦ä¸²åº“å‡½æ•°*/
+#include "string.h" /*ÒýÈë×Ö·û´®¿âº¯Êý*/
 using namespace std;
-void GetNext(char T[], int next[])
-{
+void GetNext(char T[], int next[]) {
 	int j, k;
 	j = 0;
 	k = -1;
 	next[0] = -1;
-	while (T[j] != '\0')
-	{
-		if (k == -1 || T[j] == T[k])
-		{
+	while(T[j] != '\0') {
+		if(k == -1 || T[j] == T[k]) {
 			j++;
 			k++;
 			next[j] = k;
 		}
-		else
-		{
+		else {
 			k = next[k];
 		}
 	}
 }
 
-int KMPIndex(char S[], char T[])
-{
+int KMPIndex(char S[], char T[]) {
 	int next[100];
-	int i, j;
+	int i,j;
 	i = 0;
 	j = 0;
 	GetNext(T, next);
-	while (S[i] != '\0' && T[j] != '\0')
-	{
-		if (j == -1 || S[i] == T[j])
-		{
+	while(S[i] != '\0' && T[j] != '\0') {
+		if(j == -1 || S[i] == T[j]) {
 			i++;
 			j++;
 		}
 		else
 			j = next[j];
 	}
-	if (T[j] == '\0')
+	if(T[j] == '\0')
 		return i - j + 1;
 	else
 		return 0;
 }
 
-int main()
-{
+int main() {
 	char S[100];
 	char T[100];
-	cout << "è¯·è¾“å…¥ç›®æ ‡ä¸²S:" << endl;
-	cin >> S;
-	cout << "è¯·è¾“å…¥æ¨¡å¼ä¸²T:" << endl;
-	cin >> T;
+	cout<<"ÇëÊäÈëÄ¿±ê´®S:"<<endl;
+	cin>>S;
+	cout<<"ÇëÊäÈëÄ£Ê½´®T:"<<endl;
+	cin>>T;
 	int pos;
 	pos = KMPIndex(S, T);
-	if (pos == 0)
-	{
-		cout << "åŒ¹é…å¤±è´¥ï¼";
+	if(pos == 0) {
+		cout<<"Æ¥ÅäÊ§°Ü£¡";
 	}
-	else
-	{
-		cout << T << "åœ¨" << S << "ä¸­ç¬¬ä¸€æ¬¡å‡ºçŽ°çš„ä½ç½®æ˜¯" << pos << endl;
+	else {
+		cout<<T<<"ÔÚ"<<S<<"ÖÐµÚÒ»´Î³öÏÖµÄÎ»ÖÃÊÇ"<<pos<<endl;
 	}
 	return 0;
 }

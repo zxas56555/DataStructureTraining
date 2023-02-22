@@ -1,80 +1,69 @@
 #include <iostream>
 #include <stdlib.h>
-#include <time.h>
+#include <time.h> 
 
 using namespace std;
 #define MaxSize 10
-/*ä½¿ç”¨éšæœºæ•°ä¸ºä¸‰å¯¹è§’çŸ©é˜µèµ‹åˆå€¼*/
-void InitMatrix(int A[][MaxSize], int n)
-{
+/*Ê¹ÓÃËæ»úÊıÎªÈı¶Ô½Ç¾ØÕó¸³³õÖµ*/ 
+void InitMatrix(int A[][MaxSize], int n) {
 	int a = 10;
 	int b = 50;
-	srand((unsigned)time(NULL));
+	srand((unsigned)time(NULL)); 
 	int i, j;
-	for (i = 0; i < n; i++)
-	{
-		for (j = 0; j < n; j++)
-		{
-			if (abs(i - j) <= 1)
+	for(i = 0; i < n; i++) {
+		for(j = 0; j < n; j++) {
+			if(abs(i - j) <= 1)
 				A[i][j] = (rand() % (b - a)) + a;
 			else
-				A[i][j] = 0;
+			 	A[i][j] = 0;
 		}
 	}
 }
 
-/*è¾“å‡ºä¸‰å¯¹è§’çŸ©é˜µ*/
-void PrintMatrix(int A[][MaxSize], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			cout.width(3);
-			cout << A[i][j] << " ";
+/*Êä³öÈı¶Ô½Ç¾ØÕó*/ 
+void PrintMatrix(int A[][MaxSize],int n) {
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < n; j++) {
+			cout.width(3);		
+			cout<<A[i][j]<<" ";
 		}
-		cout << endl;
-	}
+		cout<<endl;
+	}		
 }
 
-/*å°†ä¸‰å¯¹è§’çŸ©é˜µAå‹ç¼©å­˜å‚¨åˆ°ä¸€ç»´æ•°ç»„SAä¸­*/
-void CompressMatrix(int A[][MaxSize], int SA[], int n)
-{
+/*½«Èı¶Ô½Ç¾ØÕóAÑ¹Ëõ´æ´¢µ½Ò»Î¬Êı×éSAÖĞ*/ 
+void CompressMatrix(int A[][MaxSize], int SA[], int n) {
 	int k = 0;
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++)
-		{
-			if (A[i][j] != 0)
-			{
+	for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++) {
+			if(A[i][j] != 0) {
 				SA[k++] = A[i][j];
 			}
 		}
 }
 
-/*æ ¹æ®è¡Œåˆ—ä¸‹æ ‡åœ¨ä¸€ç»´æ•°ç»„SAä¸­è¯»å–çŸ©é˜µå…ƒç´ */
-int GetElement(int SA[], int i, int j, int n)
-{
-	if (i < 0 || i >= n || j < 0 || j >= n)
-		throw "å‚æ•°éæ³•";
-	if (abs(i - j) <= 1)
+/*¸ù¾İĞĞÁĞÏÂ±êÔÚÒ»Î¬Êı×éSAÖĞ¶ÁÈ¡¾ØÕóÔªËØ*/ 
+int GetElement(int SA[], int i, int j, int n) {
+	if(i < 0 || i >= n || j < 0 || j >= n)
+		throw "²ÎÊı·Ç·¨";
+	if(abs(i-j) <= 1)
 		return SA[2 * i + j];
 	else
 		return 0;
 }
 
-int main()
-{
+int main() {
 	int A[MaxSize][MaxSize], n;
-	int SA[MaxSize * (MaxSize + 1) / 2];
+	int SA[MaxSize*(MaxSize + 1) / 2];
 	int i, j;
-	cout << "è¯·è¾“å…¥çŸ©é˜µçš„è¡Œåˆ—æ•°(<=10)ï¼š" << endl;
-	cin >> n;
+	cout<<"ÇëÊäÈë¾ØÕóµÄĞĞÁĞÊı(<=10)£º"<<endl; 
+	cin>>n;
 	InitMatrix(A, n);
-	cout << "ä¸‰å¯¹è§’çŸ©é˜µä¸ºï¼š" << endl;
+	cout<<"Èı¶Ô½Ç¾ØÕóÎª£º"<<endl;
 	PrintMatrix(A, n);
 	CompressMatrix(A, SA, n);
-	cout << "è¯·è¾“å…¥çŸ©é˜µå…ƒç´ çš„è¡Œåˆ—ä¸‹æ ‡iå’Œjï¼š" << endl;
-	cin >> i >> j;
-	cout << "A[" << i << "][" << j << "]çš„å€¼ä¸º" << GetElement(SA, i, j, n) << endl;
+	cout<<"ÇëÊäÈë¾ØÕóÔªËØµÄĞĞÁĞÏÂ±êiºÍj£º"<<endl;
+	cin>>i>>j;
+	cout<<"A["<<i<<"]["<<j<<"]µÄÖµÎª"<<GetElement(SA, i, j, n)<<endl;
 	return 0;
 }

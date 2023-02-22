@@ -3,6 +3,12 @@
 		"xstring": "cpp",
 		"utility": "cpp",
 		"vector": "cpp",
-		"ostream": "cpp"
+		"ostream": "cpp",
+		"iostream": "cpp",
+		"system_error": "cpp",
+		"type_traits": "cpp",
+		"xlocmon": "cpp",
+		"xtr1common": "cpp",
+		"xutility": "cpp"
 	}
 }
