@@ -1,90 +1,102 @@
-#include <iostream>  
+#include <iostream>
 #define MaxSize 100
 using namespace std;
 
-/*ÈıÔª×é*/
+/*ä¸‰å…ƒç»„*/
 template <class ElemType>
-struct Triple{
+struct Triple
+{
 	ElemType e;
 	int i, j;
 };
 
-/*ÈıÔª×éË³Ğò±í*/
+/*ä¸‰å…ƒç»„é¡ºåºè¡¨*/
 template <class ElemType>
-struct SMatrix{
-	Triple<ElemType> data[MaxSize + 1]; /*data[0]¿ÕÖÃ²»ÓÃ*/
-	int m, n, t; /*¾ØÕóµÄĞĞÊı£¬ÁĞÊı£¬·ÇÁãÔª¸öÊı*/
+struct SMatrix
+{
+	Triple<ElemType> data[MaxSize + 1]; /*data[0]ç©ºç½®ä¸ç”¨*/
+	int m, n, t;						/*çŸ©é˜µçš„è¡Œæ•°ï¼Œåˆ—æ•°ï¼Œéé›¶å…ƒä¸ªæ•°*/
 };
 
-/*ÈıÔª×éË³Ğò±íµÄ³õÊ¼»¯*/
+/*ä¸‰å…ƒç»„é¡ºåºè¡¨çš„åˆå§‹åŒ–*/
 template <class ElemType>
-void CreateSMatrix(SMatrix<ElemType> &M) {
-	cout<<"ÇëÊäÈëÏ¡Êè¾ØÕóµÄĞĞÊım£º"<<endl;
-	cin>>M.m;
-	cout<<"ÇëÊäÈëÏ¡Êè¾ØÕóµÄÁĞÊın£º"<<endl;
-	cin>>M.n;
-	cout<<"ÇëÊäÈëÏ¡Êè¾ØÕóµÄ·ÇÁãÔªËØµÄ¸öÊıt£º"<<endl;
-	cin>>M.t;
+void CreateSMatrix(SMatrix<ElemType> &M)
+{
+	cout << "è¯·è¾“å…¥ç¨€ç–çŸ©é˜µçš„è¡Œæ•°mï¼š" << endl;
+	cin >> M.m;
+	cout << "è¯·è¾“å…¥ç¨€ç–çŸ©é˜µçš„åˆ—æ•°nï¼š" << endl;
+	cin >> M.n;
+	cout << "è¯·è¾“å…¥ç¨€ç–çŸ©é˜µçš„éé›¶å…ƒç´ çš„ä¸ªæ•°tï¼š" << endl;
+	cin >> M.t;
 	int k;
-	for(k=1; k <= M.t; k++) {
-		cout<<"ÇëÊäÈëµÚ"<<k<<"¸ö·ÇÁãÔªËØËùÔÚµÄĞĞ£¬ËùÔÚµÄÁĞ£¬Öµ£º"<<endl;
-		cin>>M.data[k].i;
-		cin>>M.data[k].j;
-		cin>>M.data[k].e;
+	for (k = 1; k <= M.t; k++)
+	{
+		cout << "è¯·è¾“å…¥ç¬¬" << k << "ä¸ªéé›¶å…ƒç´ æ‰€åœ¨çš„è¡Œï¼Œæ‰€åœ¨çš„åˆ—ï¼Œå€¼ï¼š" << endl;
+		cin >> M.data[k].i;
+		cin >> M.data[k].j;
+		cin >> M.data[k].e;
 	}
 }
 
-/*´òÓ¡ÈıÔª×éË³Ğò±í*/
+/*æ‰“å°ä¸‰å…ƒç»„é¡ºåºè¡¨*/
 template <class ElemType>
-void PrintSMatrix(SMatrix<ElemType> M) {
-	cout<<"Ï¡Êè¾ØÕóµÄÈıÔª×éË³Ğò±íÎª£º"<<endl;
+void PrintSMatrix(SMatrix<ElemType> M)
+{
+	cout << "ç¨€ç–çŸ©é˜µçš„ä¸‰å…ƒç»„é¡ºåºè¡¨ä¸ºï¼š" << endl;
 	int k;
-	for(k = 1; k <= M.t; k++) {
-		cout<<M.data[k].i<<" "<<M.data[k].j<<" "<<M.data[k].e<<endl;
+	for (k = 1; k <= M.t; k++)
+	{
+		cout << M.data[k].i << " " << M.data[k].j << " " << M.data[k].e << endl;
 	}
 }
 
-/*Ê¹ÓÃÈıÔª×éË³Ğò±í´æ´¢Ï¡Êè¾ØÕóÊ±£¬ÆÕÍ¨µÄ×ªÖÃ·½·¨*/
+/*ä½¿ç”¨ä¸‰å…ƒç»„é¡ºåºè¡¨å­˜å‚¨ç¨€ç–çŸ©é˜µæ—¶ï¼Œæ™®é€šçš„è½¬ç½®æ–¹æ³•*/
 template <class ElemType>
-void TransposeSMatrix(SMatrix<ElemType> M, SMatrix<ElemType> &T) {
-	/*TÎªMµÄ×ªÖÃ¾ØÕó*/
+void TransposeSMatrix(SMatrix<ElemType> M, SMatrix<ElemType> &T)
+{
+	/*Tä¸ºMçš„è½¬ç½®çŸ©é˜µ*/
 	T.m = M.n;
 	T.n = M.m;
 	T.t = M.t;
-	if(T.t) {
+	if (T.t)
+	{
 		int q = 1;
-		/*°´MµÄÁĞµÄË³Ğò½øĞĞ×ªÖÃ*/
-			/*¶ÔMµÄÃ¿Ò»ÁĞ±éÀúÒ»±éÈıÔª×éË³Ğò±í*/
-			for(int p = 1; p <= M.t; p++)
-				if(M.data[p].j == col) {
-					T.data[q].i = M.data[p].j;
-					T.data[q].j = M.data[p].i;
-					T.data[q].e = M.data[p].e;
-					q++;
-				}
+		/*æŒ‰Mçš„åˆ—çš„é¡ºåºè¿›è¡Œè½¬ç½®*/
+		/*å¯¹Mçš„æ¯ä¸€åˆ—éå†ä¸€éä¸‰å…ƒç»„é¡ºåºè¡¨*/
+		for (int p = 1; p <= M.t; p++)
+			if (M.data[p].j == col)
+			{
+				T.data[q].i = M.data[p].j;
+				T.data[q].j = M.data[p].i;
+				T.data[q].e = M.data[p].e;
+				q++;
+			}
 	}
 }
 
-/*Ê¹ÓÃÈıÔª×éË³Ğò±í´æ´¢Ï¡Êè¾ØÕóÊ±£¬¿ìËÙ×ªÖÃ·½·¨*/
+/*ä½¿ç”¨ä¸‰å…ƒç»„é¡ºåºè¡¨å­˜å‚¨ç¨€ç–çŸ©é˜µæ—¶ï¼Œå¿«é€Ÿè½¬ç½®æ–¹æ³•*/
 template <class ElemType>
-void FastTransposeSMatrix(SMatrix<ElemType> M, SMatrix<ElemType> &T) {
+void FastTransposeSMatrix(SMatrix<ElemType> M, SMatrix<ElemType> &T)
+{
 	T.m = M.n;
 	T.n = M.m;
 	T.t = M.t;
-	int cnum[MaxSize]; /*Ã¿Ò»ÁĞ·ÇÁãÔª¸öÊı*/ 
-	int cpot[MaxSize]; /*Ã¿Ò»ÁĞµÚÒ»¸ö·ÇÁãÔªÔÚÈıÔª×éË³Ğò±íÖĞµÄÎ»ÖÃ*/
+	int cnum[MaxSize]; /*æ¯ä¸€åˆ—éé›¶å…ƒä¸ªæ•°*/
+	int cpot[MaxSize]; /*æ¯ä¸€åˆ—ç¬¬ä¸€ä¸ªéé›¶å…ƒåœ¨ä¸‰å…ƒç»„é¡ºåºè¡¨ä¸­çš„ä½ç½®*/
 	int col, t, p, q;
-	if(T.t) {
-		for(col = 1; col <= M.n; col++)
-			cnum[col]=0; /*Ã¿Ò»ÁĞ·ÇÁãÔª¸öÊı³õÊ¼»¯Îª0*/
-		for(t = 1; t <= M.t; t++)
+	if (T.t)
+	{
+		for (col = 1; col <= M.n; col++)
+			cnum[col] = 0; /*æ¯ä¸€åˆ—éé›¶å…ƒä¸ªæ•°åˆå§‹åŒ–ä¸º0*/
+		for (t = 1; t <= M.t; t++)
 			cnum[M.data[t].j]++;
 		cpot[1] = 1;
-		/*ºóÒ»ÁĞµÚÒ»¸ö·ÇÁãÔªµÄÎ»ÖÃµÈÓÚ
-        Ç°Ò»ÁĞµÄµÚÒ»¸ö·ÇÁãÔªµÄÎ»ÖÃ¼ÓÇ°Ò»ÁĞµÄ·ÇÁãÔªµÄ¸öÊı*/ 
-		for(col = 2; col <= M.n; col++)
-			cpot[col] = cpot[col-1] + cnum[col-1];
-		for(p = 1; p <= M.t; p++) {
+		/*åä¸€åˆ—ç¬¬ä¸€ä¸ªéé›¶å…ƒçš„ä½ç½®ç­‰äº
+		å‰ä¸€åˆ—çš„ç¬¬ä¸€ä¸ªéé›¶å…ƒçš„ä½ç½®åŠ å‰ä¸€åˆ—çš„éé›¶å…ƒçš„ä¸ªæ•°*/
+		for (col = 2; col <= M.n; col++)
+			cpot[col] = cpot[col - 1] + cnum[col - 1];
+		for (p = 1; p <= M.t; p++)
+		{
 			col = M.data[p].j;
 			q = cpot[col];
 			T.data[q].i = M.data[p].j;
@@ -95,15 +107,16 @@ void FastTransposeSMatrix(SMatrix<ElemType> M, SMatrix<ElemType> &T) {
 	}
 }
 
-int main() {
-	SMatrix<int> M,T;
+int main()
+{
+	SMatrix<int> M, T;
 	CreateSMatrix(M);
 	PrintSMatrix(M);
-	/*µ÷ÓÃÆÕÍ¨µÄ×ªÖÃ·½·¨*/
+	/*è°ƒç”¨æ™®é€šçš„è½¬ç½®æ–¹æ³•*/
 	/*TransposeSMatrix(M,T);*/
-	/*µ÷ÓÃ¿ìËÙ×ªÖÃ·½·¨*/
-	FastTransposeSMatrix(M,T);
-	cout<<"×ªÖÃºóµÄ";
+	/*è°ƒç”¨å¿«é€Ÿè½¬ç½®æ–¹æ³•*/
+	FastTransposeSMatrix(M, T);
+	cout << "è½¬ç½®åçš„";
 	PrintSMatrix(T);
 	return 0;
 }
