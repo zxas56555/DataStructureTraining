@@ -24,7 +24,7 @@ public:
 void tripleTable::inputTripleTable()
 {
 	cin >> maxx >> maxy >> num;
-	for (int i = 0; i < num; i++)
+	for (int i = 1; i <= num; i++)
 	{
 		cin >> this->data[i].x >> this->data[i].y >> this->data[i].value;
 	}
@@ -57,7 +57,6 @@ tripleTable tripleTable::transposeTripleTable()
 					after.data[q].value = this->data[i].value;
 					q++;
 				}
-				
 	}
 	return after;
 }
@@ -98,8 +97,8 @@ int main()
 	a.inputTripleTable();
 	a.printTripleTable();
 	tripleTable transposedTripleTable;
-	transposedTripleTable = a.fastTransposeTripleTable();
-//	transposedTripleTable = a.transposeTripleTable();
-	cout << "The transposed triple table is" << endl;
+//	transposedTripleTable = a.fastTransposeTripleTable();
+	transposedTripleTable = a.transposeTripleTable();
 	transposedTripleTable.printTripleTable();
+	cout << "By 李冠润" << endl;
 }
